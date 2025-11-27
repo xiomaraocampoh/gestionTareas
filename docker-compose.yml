@@ -1,33 +1,29 @@
 version: '3.8'
 
 services:
-  # Servicio 1: Base de Datos MySQL
   mysqldb:
     image: mysql:8.0
     container_name: mysql_container
     restart: always
     environment:
-      MYSQL_DATABASE: taskdb
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: taskdb       # Coincide con tu application.properties
+      MYSQL_ROOT_PASSWORD: root    # Coincide con tu application.properties
     ports:
-      - "3307:3306" # Mapeamos al 3307 local para evitar conflictos si tienes MySQL local
+      - "3307:3306"                # Puerto externo 3307
     volumes:
-      - mysql_data:/var/lib/mysql # Persistencia de datos
+      - mysql_data:/var/lib/mysql
 
-  # Servicio 2: Aplicación Spring Boot
   app:
     build: .
     container_name: spring_app
     ports:
       - "8080:8080"
     environment:
-      - MYSQL_HOST=mysqldb       # Debe coincidir con el nombre del servicio arriba
+      - MYSQL_HOST=mysqldb
       - MYSQL_USER=root
-      - MYSQL_PASSWORD=rootpassword
+      - MYSQL_PASSWORD=root
     depends_on:
       - mysqldb
-    restart: on-failure # Reintenta si falla (ej. si la DB aún no está lista)
 
-# Definición del volumen
 volumes:
   mysql_data:
