@@ -13,8 +13,19 @@ public class TaskResponseDTO {
         this.description = description;
         this.status = status;
     }
-    // Getters...
+
     public Long getId() { return id; }
     public String getDescription() { return description; }
     public TaskStatus getStatus() { return status; }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
 }
+
