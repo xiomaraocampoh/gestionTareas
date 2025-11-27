@@ -1,5 +1,6 @@
 package com.xiomara.task_manager.controller;
 
+import com.xiomara.task_manager.dto.TaskRequestDTO; // <--- ESTA ES LA LÍNEA QUE FALTABA
 import com.xiomara.task_manager.dto.TaskResponseDTO;
 import com.xiomara.task_manager.service.TaskService;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<TaskResponseDTO> createTask(@RequestBody TaskRequestDTO taskRequestDTO) {
-        // Validación básica (se podría expandir con @Valid)
+        // Validación básica
         if (taskRequestDTO.getDescription() == null || taskRequestDTO.getDescription().trim().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
