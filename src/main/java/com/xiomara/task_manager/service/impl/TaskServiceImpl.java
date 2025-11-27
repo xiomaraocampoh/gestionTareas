@@ -8,9 +8,8 @@ import com.xiomara.task_manager.service.TaskService;
 import com.xiomara.task_manager.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -25,11 +24,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    @Transactional(readOnly = true) // Optimización de rendimiento
+    @Transactional(readOnly = true)
     public List<TaskResponseDTO> getAllTasks() {
         return taskRepository.findAll().stream()
                 .map(taskMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
